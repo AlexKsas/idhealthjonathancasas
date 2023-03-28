@@ -1,0 +1,22 @@
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 0 20px 0;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+  .divProductos{
+    margin-top: 80px;
+  }
+  .divNav{
+    display: flex;
+  }

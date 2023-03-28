@@ -1,0 +1,134 @@
+<div>
+    <!-- Button trigger modal -->
+    <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+    <div class="toolbar" role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <a href="https://jhonatankasas.web.app/" target="_blank" rel="noopener noreferrer">
+                        <img width="100" alt="Angular Logo"  src="https://jhonatankasas.web.app/static/media/Jonathan-Ksas_1.009a9f58.png"/>
+                    </a>
+                </div>
+                <div class="col-6 ">
+                    <div class="divNav">
+                        <nav class="nav justify-content-center">
+                        <a class="nav-link active" style="color:white" [routerLink]="'/usuarios'" >Usuarios</a>
+                        <a class="nav-link" style="color:white" [routerLink]="'/productos'" >Productos</a>
+                        <a class="nav-link" style="color:white" [routerLink]="'/categorias'" >Categorias</a>
+                        
+                        </nav>
+                        <button (click)="SignOut()" class="btn btn-info">
+                            {{nombre}}
+                            cerrar Sesion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div>
+            <div class="container divUsuarios">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <div>
+                            <div class="form-group">
+                                <div class="container">
+                                    <div class="row">
+                                        <h5 class="text-center ">Agregar usuario</h5>
+                                        <br>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control"  name="" id="nombreC"  placeholder="" [(ngModel)]="formaddUsuario.value.nombre" >
+                                            <small id="helpId" class="form-text text-muted"  >Nombre</small>
+            
+                                            <input type="email" class="form-control" name="" id="correC"  placeholder="" [(ngModel)]="formaddUsuario.value.correo">
+                                            <small id="helpId" class="form-text text-muted">Correo</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="password" class="form-control" name="" id="contraseC"  placeholder="" [(ngModel)]="formaddUsuario.value.password">
+                                            <small id="helpId" class="form-text text-muted" >Contraseña</small>
+                                            
+                                            <input type="text" class="form-control" name="" id="rolR" placeholder="" [(ngModel)]="formaddUsuario.value.rol" disabled>
+                                            <small id="helpId" class="form-text text-muted">Rol</small>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button name="" id="" class="btn btn-primary" role="button" (click)="AddUsuario()">Agregar Usuario</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="text-center ">Listado de Usuarios</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Correo</th>
+                                        <th>rol</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let usuario of list ">
+                                <tr>
+                                    <td scope="row">{{usuario.nombre}}</td>
+                                    <td>{{usuario.correo}}</td>
+                                    <td>{{usuario.rol}}</td>
+                                    <td>
+                                        <fa-icon [icon]="faEdit" class="btn" data-bs-toggle="modal" data-bs-target="#editaModal"  (click)="editar(usuario)"></fa-icon>
+                                        <fa-icon [icon]="faTrash" type="button" class="btn btn-danger" (click)="eliminar(usuario.uid)"></fa-icon>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="editaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-center" id="exampleModalLabel">Editar Usuario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control"  name="" id="nombre"  placeholder="" [(ngModel)]="formEditUsuario.value.nombre" >
+                                                    <small id="helpId" class="form-text text-muted"  >Nombre</small>
+                    
+                                                    <input type="email" class="form-control" name="" id="correo"  placeholder="" [(ngModel)]="formEditUsuario.value.correo">
+                                                    <small id="helpId" class="form-text text-muted">Correo</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control en" name="" id="id"  placeholder="" [(ngModel)]="formEditUsuario.value.id" disabled >
+                                                    <small id="helpId" class="form-text text-muted">Id</small>
+                                                    
+                                                    <input type="text" class="form-control" name="" id="rol"  placeholder="" [(ngModel)]="formaddUsuario.value.rol" disabled>
+                                                    <small id="helpId" class="form-text text-muted">Rol</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="password" class="form-control en" name="" id="contrasena" aria-describedby="helpId" placeholder="" [(ngModel)]="formEditUsuario.value.contrasena">
+                                                    <small id="helpId" class="form-text text-muted">contrasña</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+                                        <button type="button" class="btn btn-primary" (click)="updateUsuario()" >Guardar Cambios</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+
+        </div>
+    
+</div>

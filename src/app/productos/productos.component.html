@@ -1,0 +1,125 @@
+
+<div>
+    <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+    <div class="toolbar" role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <img width="100" alt="Angular Logo" src="https://jhonatankasas.web.app/static/media/Jonathan-Ksas_1.009a9f58.png"/>
+                </div>
+                <div class="col-6 ">
+                    <div class="divNav">
+                        <nav class="nav justify-content-center">
+                        <a class="nav-link active" style="color:white" [routerLink]="'/usuarios'" >Usuarios</a>
+                        <a class="nav-link" style="color:white" [routerLink]="'/productos'" >Productos</a>
+                        <a class="nav-link" style="color:white" [routerLink]="'/categorias'" >Categorias</a>
+                        
+                        </nav>
+                        <button (click)="SignOut()" class="btn btn-info">
+                            {{nombre}}
+                            cerrar Sesion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+      <div class="container divProductos">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div>
+                    <h5 class="text-center">Agregar de productos</h5>
+                    <div>
+                        <div class="form-group">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="text" class="form-control"  name="" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="formaddProducto.value.nombre" >
+                                        <small id="helpId" class="form-text text-muted"  >Nombre</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <select class="form-select" aria-label="Default select example" #teams (change)="onSelected(teams.value)">
+                                            <option  >Categoria</option>
+                                            <option value="{{listCategori._id}}" name="" id=""*ngFor="let listCategori of listCategoria " >{{listCategori.nombre}}</option>
+                                        </select>
+                                        <small id="helpId" class="form-text text-muted">Categoria</small>
+                                    </div>
+    
+                                </div>
+                                <div>
+                                    <button name="" id="" class="btn btn-primary" role="button" (click)="crearProducto()" >Agregar Productos</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center">Listado de Productos</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>precio</th>
+                                <th>nombre</th>
+                                <th>categoria</th>
+                                <th>usuario</th>
+                                <th>Opcion</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let productos of list ">
+                            <tr>
+                                <td scope="row">{{productos.precio}}</td>
+                                <td>{{productos.nombre}}</td>
+                                <td>{{productos.categoria.nombre}}</td>
+                                <td>{{productos.usuario.nombre}}</td>
+                                <td>
+                                    <fa-icon [icon]="faEdit"class="btn" data-bs-toggle="modal" data-bs-target="#editaModal" (click)="edit(productos)"></fa-icon>
+                                    <fa-icon [icon]="faTrash" type="button" class="btn btn-danger" (click)="eliminar(productos._id)"   ></fa-icon>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="editaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control"  name="" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="formEditProducto.value.nombre" >
+                                                <small id="helpId" class="form-text text-muted"  >Nombre</small>
+                
+                                            </div>
+                                            <div class="col-6">
+                                                
+                                                <select class="form-select" aria-label="Default select example" #teams (change)="onSelectedEdita(teams.value)">
+                                                    <option  >Categoria</option>
+                                                    <option value="{{listCategori._id}}" name="" id=""*ngFor="let listCategori of listCategoria " >{{listCategori.nombre}}</option>
+                                                </select>
+                                                <small id="helpId" class="form-text text-muted">Categoria</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="updateProducto()" >Guardar Cambios</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+    </div>
+    
+</div>
